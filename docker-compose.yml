@@ -1,4 +1,4 @@
-version: "2"
+version: "3.7"
 
 services:
 
@@ -6,7 +6,7 @@ services:
     image: prom/prometheus:latest
     container_name: ping-prometheus
     tty: true
-    restart: always
+    restart: unless-stopped
     volumes:
       - ./prometheus/prometheus.yaml:/etc/prometheus.yaml:ro
       - ./prometheus/prometheus:/prometheus:rw
@@ -15,8 +15,8 @@ services:
       - --storage.tsdb.retention.time=365d
       - --query.lookback-delta=2m
       - --web.listen-address=0.0.0.0:9090
-    # ports:
-    #   - 9090:9090
+    ports:
+      - 9090:9090
     # Debug
     # entrypoint: /bin/sh
 
@@ -24,7 +24,7 @@ services:
     container_name: ping-grafana
     image: grafana/grafana:latest
     tty: true
-    restart: always
+    restart: unless-stopped
     environment:
         - GF_SECURITY_ADMIN_PASSWORD=ahReTjVYWv0EQ
     depends_on:
@@ -39,7 +39,7 @@ services:
     container_name: ping-blackbox
     image: prom/blackbox-exporter:master
     tty: true
-    restart: always
+    restart: unless-stopped
     volumes:
       - ./blackbox/config.yml:/etc/blackbox_exporter/config.yml:ro
     # ports:
