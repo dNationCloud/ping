@@ -1,0 +1,45 @@
+version: "3.7"
+
+services:
+
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: ping-prometheus
+    tty: true
+    restart: unless-stopped
+    volumes:
+      - ./prometheus/prometheus.yaml:/etc/prometheus.yaml:ro
+      - ./prometheus/prometheus:/prometheus:rw
+    command:
+      - --config.file=/etc/prometheus.yaml
+      - --storage.tsdb.retention.time=365d
+      - --query.lookback-delta=2m
+      - --web.listen-address=0.0.0.0:9090
+    #ports:
+    #  - 9090:9090
+
+
+  grafana:
+    container_name: ping-grafana
+    image: grafana/grafana:latest
+    tty: true
+    restart: unless-stopped
+    environment:
+        - GF_SECURITY_ADMIN_PASSWORD=${ADMIN_PASSWORD}
+    depends_on:
+      - prometheus
+    volumes:
+      - ./grafana/provisioning:/etc/grafana/provisioning:ro
+      - ./grafana/dashboards-json:/etc/grafana/dashboards-json:ro
+    ports:
+      - ${BACKEND_PORT}:3000
+
+  blackbox:
+    container_name: ping-blackbox
+    image: prom/blackbox-exporter:master
+    tty: true
+    restart: unless-stopped
+    volumes:
+      - ./blackbox/config.yml:/etc/blackbox_exporter/config.yml:ro
+    # ports:
+    #   - 9115:9115
