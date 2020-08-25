@@ -4,3 +4,6 @@ prometheus/prometheus/data/
 #JetBrains IDE Data
 .idea/
 *.iml
+
+#README.md pictures
+images/
