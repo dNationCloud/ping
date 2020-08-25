@@ -1,29 +1,48 @@
-* Ping selected IPs every 15s
-* Show graph
-* For installation see [README.md](https://git.ifne.eu/infra/docker/blob/master/web/vyznanie.sk/README.md) and follow:
-```bash
-# Look for "targets:"
-vim prometheus/prometheus.yaml
+![alt text](images/dNPing_logo.png "dNation Ping logo")
+-
+dNation Ping is a transparent tool for pinging selected IP addresses or domain names in set intervals with results displayed on graph.
 
-chmod a=rwx prometheus/prometheus
-docker-compose up -d
+![alt text](images/ping_grafana_screenshot.png "dNation Ping logo")
+
+## Getting Started 
+### Prerequisites
+
+* [Docker](https://www.docker.com/)
+* [Docker-compose](https://docs.docker.com/compose/)
+
+### Installation Notes
+
+after you create a clone of this repository on your machine
+
+```bash
+$ sudo docker-compose up -d
 ```
 
-* [Prometheus](http://localhost:9090/targets) (needs to be enabled in docker-compose.yml)
-* [Blackbox](http://localhost:9115/) (needs to be enabled in docker-compose.yml)
-* [Grafana](http://localhost:3000/): admin ahReTjVYWv0EQ
+## Deployment
+**After installing dNation Ping:**
+
+> Open (http://localhost:3001/) in your web browser, this will open [Grafana](http://localhost:3000/) GUI
+
+> Username : *admin* 
+
+> Password : *ahReTjVYWv0EQ*
+
+## Built With
+
+* [Prometheus](https://prometheus.io/)
+* [Blackbox-exporter](https://github.com/prometheus/blackbox_exporter/blob/master/README.md)
+* [Grafana](https://grafana.com/)
 
 
-## Installation Notes
-```bash
-useradd -s /bin/bash -m -g users -G docker docker
-chmod g+w /home/docker
-apt install certbot python-certbot-apache
-certbot certonly --apache -m admin@ifne.eu -d ping-deploy.ifne.eu -d www.ping-deploy.ifne.eu
 
-cd /etc/apache2/sites-available
-ln -s /home/docker/docker/ping/apache/ping-deploy.ifne.eu.conf
-a2ensite ping-deploy.ifne.eu.conf
-apache2ctl configtest
-service apache2 reload
-```
+
+
+
+
+
+
+
+
+
+
+

@@ -114,8 +114,8 @@
     "list": []
   },
   "time": {
-    "from": "now-3h",
-    "to": "now"
+    "from": "now-2h",
+    "to": "now+2h"
   },
   "timepicker": {},
   "timezone": "",

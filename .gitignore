@@ -1,11 +1,6 @@
 # Ignore data files created by Prometheus, these are not in GIT but backed up by BackupPc
 prometheus/prometheus/data/
 
-
 #JetBrains IDE Data
 .idea/
-
 *.iml
-
-
-
