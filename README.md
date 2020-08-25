@@ -18,7 +18,7 @@ after you create a clone of this repository on your machine
 $ sudo docker-compose up -d
 ```
 
-## Deployment
+## Usage
 **After installing dNation Ping:**
 
 > Open (http://localhost:3001/) in your web browser, this will open [Grafana](http://localhost:3000/) GUI
