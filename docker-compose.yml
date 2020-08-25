@@ -26,7 +26,7 @@ services:
     tty: true
     restart: unless-stopped
     environment:
-        - GF_SECURITY_ADMIN_PASSWORD=ahReTjVYWv0EQ
+        - GF_SECURITY_ADMIN_PASSWORD=${ADMIN_PASSWORD}
     depends_on:
       - prometheus
     volumes:
