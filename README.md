@@ -29,7 +29,7 @@ $ docker-compose up -d
 > Password : *admin*
 
 ### Modifications
-* **If you want to change password from default**
+* **If you want to change default password**
 
 ```bash
 $ docker-compose down
@@ -37,11 +37,19 @@ $ export ADMIN_PASSWORD=your_password
 $ docker-compose up -d
 ```
 
-* **If you want to change port from default (3001)**
+* **If you want to change default port (3001)**
 
 ```bash
 $ docker-compose down
 $ export PING_PORT=your_port
+$ docker-compose up -d
+```
+
+* **If you want to add or remove pinging targets**
+
+```bash
+$ docker-compose down
+$ vim prometheus/prometheus.yaml #look for -targets:
 $ docker-compose up -d
 ```
 
