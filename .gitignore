@@ -5,5 +5,3 @@ prometheus/prometheus/data/
 .idea/
 *.iml
 
-#README.md pictures
-images/
