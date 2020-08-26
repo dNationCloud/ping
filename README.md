@@ -8,14 +8,15 @@ dNation Ping is a transparent tool for pinging selected IP addresses or domain n
 ### Prerequisites
 
 * [Docker](https://www.docker.com/)
-* [Docker-compose](https://docs.docker.com/compose/)
+* [Docker-compose](https://docs.docker.com/compose/) **>= *v3.0***
 
 ### Installation Notes
 
 after you create a clone of this repository on your machine
 
 ```bash
-$ sudo docker-compose up -d
+$ chmod a=rwx prometheus/prometheus
+$ docker-compose up -d
 ```
 
 ## Usage
@@ -25,7 +26,24 @@ $ sudo docker-compose up -d
 
 > Username : *admin* 
 
-> Password : *ahReTjVYWv0EQ*
+> Password : *admin*
+
+### Modifications
+* **If you want to change password from default**
+
+```bash
+$ docker-compose down
+$ export ADMIN_PASSWORD=your_password
+$ docker-compose up -d
+```
+
+* **If you want to change port from default (3001)**
+
+```bash
+$ docker-compose down
+$ export PING_PORT=your_port
+$ docker-compose up -d
+```
 
 ## Built With
 
