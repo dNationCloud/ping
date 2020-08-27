@@ -10,6 +10,7 @@ services:
     volumes:
       - ./prometheus/prometheus.yaml:/etc/prometheus.yaml:ro
       - ./prometheus/prometheus:/prometheus:rw
+      - ./prometheus/targets.json:/etc/targets.json:ro
     command:
       - --config.file=/etc/prometheus.yaml
       - --storage.tsdb.retention.time=365d
@@ -18,7 +19,6 @@ services:
     #ports:
     #  - 9090:9090
 
-
   grafana:
     container_name: ping-grafana
     image: grafana/grafana:latest
@@ -26,13 +26,16 @@ services:
     restart: unless-stopped
     environment:
         - GF_SECURITY_ADMIN_PASSWORD=${ADMIN_PASSWORD}
+        - GF_DASHBOARDS_DEFAULT_HOME_DASHBOARD_PATH=/etc/grafana/dashboards-json/Ping.json
     depends_on:
       - prometheus
     volumes:
       - ./grafana/provisioning:/etc/grafana/provisioning:ro
       - ./grafana/dashboards-json:/etc/grafana/dashboards-json:ro
+      - ./images/grafana_icon.svg:/usr/share/grafana/public/img/grafana_icon.svg:rw
     ports:
       - ${PING_PORT}:3000
+
 
   blackbox:
     container_name: ping-blackbox
