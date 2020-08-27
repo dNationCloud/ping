@@ -6,13 +6,9 @@ scrape_configs:
       metrics_path: /probe
       params:
         module: [icmp_ipv4]
-      static_configs:
-        - targets:
-          - 1.1.1.1      # CloudFlare DNS
-          - 184.51.10.83 # www.microsoft.com
-          - 193.17.47.1  # CZ-NIC DNS
-          - google.com
-          - vyznanie.sk
+      file_sd_configs:
+      - files:
+        - '/etc/targets.json'
       relabel_configs:
         - source_labels: [__address__]
           target_label: __param_target

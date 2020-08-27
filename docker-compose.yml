@@ -10,6 +10,7 @@ services:
     volumes:
       - ./prometheus/prometheus.yaml:/etc/prometheus.yaml:ro
       - ./prometheus/prometheus:/prometheus:rw
+      - ./prometheus/targets.json:/etc/targets.json:ro
     command:
       - --config.file=/etc/prometheus.yaml
       - --storage.tsdb.retention.time=365d
@@ -17,7 +18,6 @@ services:
       - --web.listen-address=0.0.0.0:9090
     #ports:
     #  - 9090:9090
-
 
   grafana:
     container_name: ping-grafana

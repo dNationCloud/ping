@@ -26,7 +26,7 @@ $ docker-compose up -d
 
 > Username : *admin* 
 
-> Password : *admin*
+> Password : *pass*
 
 ### Modifications
 * **If you want to change default password**
@@ -47,11 +47,9 @@ $ docker-compose up -d
 
 * **If you want to add or remove pinging targets**
 
-```bash
-$ docker-compose down
-$ vim prometheus/prometheus.yaml #look for -targets:
-$ docker-compose up -d
-```
+    - Edit targets in /prometheus/targets.json file *(don't use vim file editor)*
+    - Save file
+    - Applied changes should appear in GUI within 5 minutes period
 
 ## Built With
 
