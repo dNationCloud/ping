@@ -1,0 +1,74 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: prometheus
+spec:
+  selector:
+    matchLabels:
+      app: prometheus
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: prometheus
+    spec:
+      serviceAccountName: prometheus
+      containers:
+      - name: ping-prometheus
+        image: prom/prometheus:latest
+        args:
+        - --config.file=/etc/prometheus/prometheus.yaml
+        - --storage.tsdb.path=/prometheus  
+        - --storage.tsdb.retention.time=365d
+        - --query.lookback-delta=2m
+        - --web.listen-address=0.0.0.0:9090
+        command: 
+        - /bin/prometheus
+        ports:
+        - containerPort: 9090
+          name: default
+        volumeMounts:
+        - name: config-prometheus
+          mountPath: "/etc/prometheus"
+        - name: data
+          mountPath: "/prometheus"
+        - name: targets-prometheus
+          mountPath: "/etc/targets"
+          readOnly: true
+      - name: ping-blackbox
+        image: prom/blackbox-exporter:master
+        volumeMounts:
+        - name: config-blackbox
+          mountPath: "/etc/blackbox_exporter"
+          readOnly: true
+      volumes:
+      - name: config-prometheus
+        configMap:
+          name: prometheus-config
+      - name: data
+        emptyDir: {}
+      - name: targets-prometheus
+        configMap: 
+          name: prometheus-targets
+      - name: config-blackbox
+        configMap:
+          name: blackbox-config
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: prometheus
+spec:
+  selector:
+    app: prometheus
+  type: NodePort 
+  ports:
+  - protocol: TCP
+    port: 9090 
+    targetPort: 9090
+    nodePort: 30909
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: prometheus
