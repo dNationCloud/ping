@@ -1,4 +1,7 @@
 apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: grafana-dashboard-config
 data:
   Ping.json: |
     {
@@ -132,23 +135,11 @@ data:
       "uid": "eQzUn_fWz",
       "version": 1
     }
-kind: ConfigMap
-metadata:
-  managedFields:
-  - apiVersion: v1
-    fieldsType: FieldsV1
-    fieldsV1:
-      f:data:
-        .: {}
-        f:Ping.json: {}
-    manager: kubectl-create
-    operation: Update
-    time: "2020-09-07T11:49:30Z"
-  name: grafana-dashboard-config
-  namespace: default
-  resourceVersion: "7416"
 ---
 apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: grafana-provisioning-dashboard
 data:
   default.yaml: |
     - name: 'default'       # name of this dashboard configuration (not dashboard itself)
@@ -157,23 +148,11 @@ data:
       type: 'file'          # type of dashboard description (json files)
       options:
         folder: '/etc/grafana/dashboards-json'       # where dashboards are
-kind: ConfigMap
-metadata:
-  managedFields:
-  - apiVersion: v1
-    fieldsType: FieldsV1
-    fieldsV1:
-      f:data:
-        .: {}
-        f:default.yaml: {}
-    manager: kubectl-create
-    operation: Update
-    time: "2020-09-07T14:07:47Z"
-  name: grafana-provisioning-dashboard
-  namespace: default
-  resourceVersion: "32754"
 ---
 apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: grafana-datasources
 data:
   default.yaml: |
     # config file version
@@ -187,23 +166,11 @@ data:
        access: proxy
        orgId: 1
        url: http://prometheus:9090
-kind: ConfigMap
-metadata:
-  managedFields:
-  - apiVersion: v1
-    fieldsType: FieldsV1
-    fieldsV1:
-      f:data:
-        .: {}
-        f:default.yaml: {}
-    manager: kubectl-create
-    operation: Update
-    time: "2020-09-08T12:10:51Z"
-  name: grafana-datasources
-  namespace: default
-  resourceVersion: "78288"
 ---
 apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: icon-config
 data:
   grafana_icon.svg: |
     <?xml version="1.0" encoding="UTF-8" standalone="no"?>
@@ -242,20 +209,6 @@ data:
          height="161.33333"
          width="161.33333" />
     </svg>
-kind: ConfigMap
-metadata:
-  managedFields:
-  - apiVersion: v1
-    fieldsType: FieldsV1
-    fieldsV1:
-      f:data:
-        .: {}
-        f:grafana_icon.svg: {}
-    manager: kubectl-create
-    operation: Update
-    time: "2020-09-07T11:24:44Z"
-  name: icon-config
-  namespace: default
-  resourceVersion: "2988"
+
 
 

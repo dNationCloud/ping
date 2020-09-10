@@ -1,4 +1,7 @@
 apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: blackbox-config
 data:
   config.yml: |+
     modules:
@@ -11,25 +14,11 @@ data:
        # prober: http
         #http:
          # preferred_ip_protocol: "ip4"
-
-
-kind: ConfigMap
-metadata:
-  managedFields:
-  - apiVersion: v1
-    fieldsType: FieldsV1
-    fieldsV1:
-      f:data:
-        .: {}
-        f:config.yml: {}
-    manager: kubectl-create
-    operation: Update
-    time: "2020-09-08T12:08:18Z"
-  name: blackbox-config
-  namespace: default
-  resourceVersion: "77826"
 ---
 apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: prometheus-config
 data:
   prometheus.yaml: |
     global:
@@ -50,24 +39,3 @@ data:
               target_label: instance
             - target_label: __address__
               replacement: ping-blackbox:9115
-kind: ConfigMap
-metadata:
-  managedFields:
-  - apiVersion: v1
-    fieldsType: FieldsV1
-    fieldsV1:
-      f:data: {}
-    manager: kubectl-create
-    operation: Update
-    time: "2020-09-08T12:06:08Z"
-  - apiVersion: v1
-    fieldsType: FieldsV1
-    fieldsV1:
-      f:data:
-        f:prometheus.yaml: {}
-    manager: kubectl-edit
-    operation: Update
-    time: "2020-09-09T11:21:42Z"
-  name: prometheus-config
-  namespace: default
-  resourceVersion: "139261"
