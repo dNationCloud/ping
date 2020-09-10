@@ -55,6 +55,11 @@ $ docker-compose up -d
     - (*Kubernetes*) Edit targets in /k8s/prometheus-targets.yml
     - Save file
     - Applied changes should appear in GUI within 5 minutes period
+    
+### More Info
+**Kubernetes related**
+
+ - *nodePort is used to expose Grafana UI (3001) and Prometheus UI (3002)*
 
 ## Built With
 
