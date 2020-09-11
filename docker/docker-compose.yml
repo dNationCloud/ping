@@ -32,7 +32,7 @@ services:
     volumes:
       - ./grafana/provisioning:/etc/grafana/provisioning:ro
       - ./grafana/dashboards-json:/etc/grafana/dashboards-json:ro
-      - ./images/grafana_icon.svg:/usr/share/grafana/public/img/grafana_icon.svg:rw
+      - ../images/grafana_icon.svg:/usr/share/grafana/public/img/grafana_icon.svg:rw
     ports:
       - ${PING_PORT}:3000
 
