@@ -59,7 +59,7 @@ $ docker-compose up -d
 ### More Info
 **Kubernetes related**
 
- - *nodePort is used to expose Grafana UI (3001) and Prometheus UI (3002)*
+ - *nodePort is used to expose Grafana UI (30071) and Prometheus UI (30909)*
 
 ## Built With
 
