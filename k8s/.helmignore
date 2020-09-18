@@ -1,0 +1,20 @@
+# Patterns to ignore when building packages.
+# Common Git dirs
+.git/
+.gitignore
+# Common backup files
+*.swp
+*.bak
+*.tmp
+# Various IDEs
+.project
+.idea/
+*.tmproj
+# helm/charts
+test/*
+release/*
+snapshot/*
+# Images
+images/*
+# Jsonnet
+jsonnet/*

@@ -72,7 +72,7 @@ data:
           "targets": [
             {
               "expr": "probe_icmp_duration_seconds{phase=\"rtt\"}",
-              "legendFormat": "{{instance}}",
+              "legendFormat": "{instance}",
               "refId": "A"
             }
           ],

@@ -1,0 +1,17 @@
+grafana:
+  adminPassword: pass
+  service:
+    type: NodePort
+    nodePort: 30071
+    port: 3000
+    targetPort: http
+  replicas: 2
+
+prometheus:
+  service:
+    type: NodePort
+    nodePort: 30909
+    port: 9090
+    targetPort: 9090
+  global:
+    scrapeInterval: 10s
