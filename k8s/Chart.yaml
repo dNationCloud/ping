@@ -10,3 +10,7 @@ keywords:
   - prometheus
   - blackbox-exporter
 home: https://git.ifne.eu/dnation/ping
+maintainers:
+- name: dnation
+  email: admin@dnation.tech
+
