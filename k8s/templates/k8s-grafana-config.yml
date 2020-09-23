@@ -5,7 +5,7 @@ metadata:
     app: grafana
   name: grafana
 spec:
-  replicas: 2
+  replicas: {{ .Values.grafana.replicas }}
   selector:
     matchLabels:
       app: grafana
@@ -18,11 +18,13 @@ spec:
       - image: grafana/grafana:latest
         name: grafana
         ports:
-        - containerPort: 3000
-          name: http
+        - containerPort: {{ .Values.grafana.service.port }}
+          name: {{ .Values.grafana.service.targetPort }}
         env:
         - name: GF_SECURITY_ADMIN_PASSWORD
-          value: pass
+          value: {{ .Values.grafana.adminPassword }}
+        - name: GF_SECURITY_ADMIN_USER
+          value: {{ .Values.grafana.adminUser }}
         - name: GF_DASHBOARDS_DEFAULT_HOME_DASHBOARD_PATH
           value: /etc/grafana/dashboards-json/Ping.json
         volumeMounts:
@@ -62,9 +64,9 @@ spec:
   selector:
     app: grafana
   ports:
-  - port: 3000
+  - port: {{ .Values.grafana.service.port }}
     protocol: TCP
-    targetPort: http
-    nodePort: 30071
-  type: NodePort
+    targetPort: {{ .Values.grafana.service.targetPort }}
+    nodePort: {{ .Values.grafana.service.nodePort }}
+  type: {{ .Values.grafana.service.type }}
 

@@ -1,0 +1,5 @@
+# Patterns to ignore when building packages.
+# Common backup files
+*.swp
+*.bak
+*.tmp

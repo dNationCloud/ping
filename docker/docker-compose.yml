@@ -27,6 +27,7 @@ services:
     environment:
         - GF_SECURITY_ADMIN_PASSWORD=${ADMIN_PASSWORD}
         - GF_DASHBOARDS_DEFAULT_HOME_DASHBOARD_PATH=/etc/grafana/dashboards-json/Ping.json
+        - GF_SECURITY_ADMIN_USER=${ADMIN_USER}
     depends_on:
       - prometheus
     volumes:
@@ -46,3 +47,4 @@ services:
       - ./blackbox/config.yml:/etc/blackbox_exporter/config.yml:ro
     # ports:
     #   - 9115:9115
+

@@ -25,7 +25,7 @@ spec:
         command: 
         - /bin/prometheus
         ports:
-        - containerPort: 9090
+        - containerPort: {{ .Values.prometheus.service.port }}
           name: default
         volumeMounts:
         - name: config-prometheus
@@ -61,12 +61,12 @@ metadata:
 spec:
   selector:
     app: prometheus
-  type: NodePort 
+  type: {{ .Values.prometheus.service.type }}
   ports:
   - protocol: TCP
-    port: 9090 
-    targetPort: 9090
-    nodePort: 30909
+    port: {{ .Values.prometheus.service.port }}
+    targetPort: {{ .Values.prometheus.service.targetPort }}
+    nodePort: {{ .Values.prometheus.service.nodePort }}
 ---
 apiVersion: v1
 kind: ServiceAccount

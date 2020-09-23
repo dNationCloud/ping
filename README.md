@@ -16,7 +16,7 @@ after you create a clone of this repository on your machine
 
 | Docker-Compose| Kubernetes |
 | :--- | :--- |
-| `$ chmod a=rwx docker/prometheus/prometheus` | `$ kubectl create -f /k8s` |
+| `$ chmod a=rwx docker/prometheus/prometheus` | `$ helm install dnation-ping ./k8s` |
 | `$ docker-compose up -d -f /docker` |
 
 
@@ -32,29 +32,24 @@ after you create a clone of this repository on your machine
 
 > Password : *pass*
 
-### Modifications
-* **If you want to change default password**
+## Modifications
+### docker-compose
 
-```bash
-$ docker-compose down
-$ export ADMIN_PASSWORD=your_password
-$ docker-compose up -d
-```
+| env variable | what it represents |
+| :--- | :--- |
+| ADMIN_USER | grafana UI username |
+| ADMIN_PASSWORD | grafana UI password |
+| PING_PORT | default grafana UI port |
 
-* **If you want to change default port (3001)**
+* **Edit pinging targets**
 
-```bash
-$ docker-compose down
-$ export PING_PORT=your_port
-$ docker-compose up -d
-```
-
-* **If you want to add or remove pinging targets**
-
-    - (*Docker-Compose*) Edit targets in /docker/prometheus/targets.json file *(don't use vim file editor)*
-    - (*Kubernetes*) Edit targets in /k8s/prometheus-targets.yml
+    - Edit targets in /docker/prometheus/targets.json file *(don't use vim file editor)*
     - Save file
     - Applied changes should appear in GUI within 5 minutes period
+    
+### kubernetes
+
+* **See k8s/values.yaml file for possible modifications**    
     
 ### More Info
 **Kubernetes related**

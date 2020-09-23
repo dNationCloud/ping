@@ -22,7 +22,7 @@ metadata:
 data:
   prometheus.yaml: |
     global:
-        scrape_interval: 10s
+        scrape_interval: {{ .Values.prometheus.global.scrapeInterval }}
 
     scrape_configs:
         - job_name: blackbox
@@ -38,4 +38,4 @@ data:
             - source_labels: [__param_target]
               target_label: instance
             - target_label: __address__
-              replacement: ping-blackbox:9115
+              replacement: localhost:9115
