@@ -1,8 +1,0 @@
-stages:
-  - test
-
-test:
-  stage: test
-  image: docker:18.09
-  script:
-    - echo "test"
