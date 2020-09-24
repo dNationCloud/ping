@@ -9,7 +9,6 @@ variables:
   tags:
     - docker
     - privileged
-    - debug
   only:
     - merge_requests
     - master
@@ -37,7 +36,6 @@ build helm package:
   extends: .base
   script:
     - helm package ./k8s -d k8s/release
-    - sleep 3000
   artifacts:
     paths:
     - k8s/release/
