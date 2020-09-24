@@ -23,7 +23,7 @@ variables:
     # Install Docker
     - apk add docker
     # Patch KinD config to listen on docker service's IP address
-    - "sed -i 's/apiServerAddress: .*/apiServerAddress: '$(grep 'docker' /etc/hosts | awk '{print $1}')/ dev/ping_kind_config.yaml"
+    - "sed -i 's/apiServerAddress: .*/apiServerAddress: '$(grep 'docker' /etc/hosts | awk '{print $1}')/ dev/ping-kind-config.yaml"
   services:
     - docker:18.09-dind
 
@@ -44,7 +44,7 @@ test lint:
   stage: test
   extends: .base
   script:
-    - helm lint ./k8s -f values.yaml
+    - helm lint ./k8s -f k8s/values.yaml
 
 test install ping:
   stage: test
