@@ -50,5 +50,5 @@ test install ping:
   stage: test
   extends: .test-install
   script:
-    - kind create cluster --config dev/ping_kind_config.yaml --image kindest/node:v1.17.5
+    - kind create cluster --config dev/ping-kind-config.yaml --image kindest/node:v1.17.5
     - helm install ping k8s/release/dnation-ping-*.tgz
