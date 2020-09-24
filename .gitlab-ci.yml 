@@ -1,3 +1,9 @@
+variables:
+  # When using DinD service, we need to instruct docker, to talk with
+  # the daemon started inside of the service. The daemon is available
+  # with a network connection instead of the default /var/run/docker.sock socket.
+  DOCKER_HOST: "tcp://docker:2375"
+
 .base:
   image: dtzar/helm-kubectl:3.3.1
   tags:
@@ -48,5 +54,3 @@ test install ping:
   script:
     - kind create cluster --config dev/ping_kind_config.yaml --image kindest/node:v1.17.5
     - helm install ping k8s/release/dnation-ping-*.tgz
-
-
