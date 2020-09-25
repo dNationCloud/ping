@@ -1,7 +1,9 @@
 # Ignore data files created by Prometheus, these are not in GIT but backed up by BackupPc
 docker/prometheus/prometheus/data/
 
-#JetBrains IDE Data
+# JetBrains IDE Data
 .idea/
 *.iml
 
+# Helm files
+k8s/release/*
