@@ -10,27 +10,28 @@ dNation Ping is a transparent tool for pinging selected IP addresses or domain n
 * [Docker](https://www.docker.com/)
 * [Docker-compose](https://docs.docker.com/compose/) **>= *v3.0*** / [Kubernetes](https://kubernetes.io/)
 
-### Installation Notes
+### Installation
 
-after you create a clone of this repository on your machine
+Create clone of this repository.
 
-| Docker-Compose| Kubernetes |
-| :--- | :--- |
-| `chmod a=rwx docker/prometheus/prometheus` | `helm install dnation-ping ./k8s` |
-| `docker-compose up -d -f /docker` |
+#### Docker-Compose
+```bash
+sudo apt install golang-docker-credential-helpers
+chmod a=rwx docker/prometheus/prometheus
+cd docker
+docker-compose up -d
+```
 
-
+#### Kubernetes
+```bash
+helm install dnation-ping ./k8s
+```
 
 ## Usage
-**After installing dNation Ping:**
-
-> Open (http://localhost:3001/) in your web browser
-
-> Grafana GUI will load
-
-> Username : *admin* 
-
-> Password : *pass*
+After installation:
+* http://localhost:3001/
+* Username: `admin`
+* Password : `pass`
 
 ## Modifications
 ### docker-compose
