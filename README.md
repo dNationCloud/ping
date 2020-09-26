@@ -16,8 +16,8 @@ after you create a clone of this repository on your machine
 
 | Docker-Compose| Kubernetes |
 | :--- | :--- |
-| `$ chmod a=rwx docker/prometheus/prometheus` | `$ helm install dnation-ping ./k8s` |
-| `$ docker-compose up -d -f /docker` |
+| `chmod a=rwx docker/prometheus/prometheus` | `helm install dnation-ping ./k8s` |
+| `docker-compose up -d -f /docker` |
 
 
 
