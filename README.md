@@ -18,8 +18,10 @@ git clone https://git.ifne.eu/dnation/ping.git
 ```
 
 #### Docker-Compose
+
+* add User to group docker
+
 ```bash
-sudo apt install golang-docker-credential-helpers
 chmod a=rwx docker/prometheus/prometheus
 cd docker
 docker-compose up -d
