@@ -12,7 +12,10 @@ dNation Ping is a transparent tool for pinging selected IP addresses or domain n
 
 ### Installation
 
-Create clone of this repository.
+```bash
+umask 0022
+git clone https://git.ifne.eu/dnation/ping.git
+```
 
 #### Docker-Compose
 ```bash
