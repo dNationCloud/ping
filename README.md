@@ -19,13 +19,22 @@ git clone https://git.ifne.eu/dnation/ping.git
 
 #### Docker-Compose
 
-* add User to group docker
+* Add user to group `docker`, logout/login if necessary
 
 ```bash
-chmod a=rwx docker/prometheus/prometheus
-cd docker
+# Is used in docker group?
+groups | grep docker
+... docker
+
+# Launch
+cd ping/docker
+chmod a=rwx prometheus/prometheus
 docker-compose up -d
+
+# Debugging
+docker-compose logs | grep EROR
 ```
+
 
 #### Kubernetes
 ```bash
