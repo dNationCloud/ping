@@ -1,12 +1,12 @@
 dnation:
   ingress:
-    enabled: false
+    enabled: true
   certificate:
-    enabled: false
+    enabled: true
 
 grafana:
   adminUser: admin
-  adminPassword: pass
+  adminPassword: sl7+E4GzhV568
   service:
     type: NodePort
     nodePort: 30071
@@ -23,7 +23,11 @@ prometheus:
   global:
     scrapeInterval: 10s
   persistence:
-    enabled: false
+    enabled: true
+    storageClassName: hcloud-volumes
+    accessModes:
+    - ReadWriteOnce
+    size: 10Gi
   targets:
   - 1.1.1.1
   - 184.51.10.83

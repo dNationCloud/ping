@@ -64,9 +64,15 @@ spec:
   selector:
     app: grafana
   ports:
-  - port: {{ .Values.grafana.service.port }}
-    protocol: TCP
+  {{- if .Values.dnation.ingress.enabled}}
+  - protocol: TCP
+    port: 3000
+    targetPort: 3000
+  {{- else }}
+  - protocol: TCP
+    port: {{ .Values.grafana.service.port }}
     targetPort: {{ .Values.grafana.service.targetPort }}
     nodePort: {{ .Values.grafana.service.nodePort }}
   type: {{ .Values.grafana.service.type }}
+  {{- end -}}
 

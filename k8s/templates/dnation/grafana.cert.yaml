@@ -1,0 +1,13 @@
+{{- if .Values.dnation.certificate.enabled }}
+apiVersion: certmanager.k8s.io/v1alpha1
+kind: Certificate
+metadata:
+  name: ping.dnation.tech
+spec:
+  secretName: ping.dnation.tech
+  issuerRef:
+    name: letsencrypt-prod
+  commonName: ping.dnation.tech
+  dnsNames:
+  - ping.dnation.tech
+{{- end -}}

@@ -24,6 +24,7 @@ spec:
         - --web.listen-address=0.0.0.0:9090
         command: 
         - /bin/prometheus
+        #- /bin/chmod -R 777 /data
         ports:
         - containerPort: {{ .Values.prometheus.service.port }}
           name: default
@@ -45,17 +46,23 @@ spec:
       - name: config-prometheus
         configMap:
           name: prometheus-config
-      - name: data
-        emptyDir: {}
       - name: targets-prometheus
-        configMap: 
+        configMap:
           name: prometheus-targets
       - name: config-blackbox
         configMap:
           name: blackbox-config
+{{- if .Values.prometheus.persistence.enabled }}
+      - name: data
+        persistentVolumeClaim:
+          claimName: ping-prometheus-pvc
+{{- else }}
+      - name: data
+        emptyDir: {}
+{{- end }}
 ---
-kind: Service
 apiVersion: v1
+kind: Service
 metadata:
   name: prometheus
 spec:
