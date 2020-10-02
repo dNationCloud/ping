@@ -32,7 +32,7 @@ chmod a=rwx prometheus/prometheus
 docker-compose up -d
 
 # Debugging
-docker-compose logs | grep EROR
+docker-compose logs | grep ERROR
 ```
 
 
