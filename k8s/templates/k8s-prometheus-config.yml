@@ -24,7 +24,6 @@ spec:
         - --web.listen-address=0.0.0.0:9090
         command: 
         - /bin/prometheus
-        #- /bin/chmod -R 777 /data
         ports:
         - containerPort: {{ .Values.prometheus.service.port }}
           name: default
@@ -42,6 +41,15 @@ spec:
         - name: config-blackbox
           mountPath: "/etc/blackbox_exporter"
           readOnly: true
+{{- if .Values.prometheus.persistence.enabled }}
+      initContainers:
+        - name: prometheus-data-permission-fix
+          image: busybox
+          command: [ "/bin/chmod","-R","777", "/data" ]
+          volumeMounts:
+            - name: data
+              mountPath: /data
+{{- end }}
       volumes:
       - name: config-prometheus
         configMap:

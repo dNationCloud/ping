@@ -3,3 +3,8 @@
 *.swp
 *.bak
 *.tmp
+#dnation
+templates/dnation/ingress.yaml
+templates/dnation/grafana.cert.yaml
+# helm/charts
+release/*
