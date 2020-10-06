@@ -3,7 +3,7 @@
 *.swp
 *.bak
 *.tmp
-#dnation
+#dnation tmp
 templates/dnation/ingress.yaml
 templates/dnation/grafana.cert.yaml
 # helm/charts

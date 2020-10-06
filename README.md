@@ -26,6 +26,12 @@ git clone https://git.ifne.eu/dnation/ping.git
 groups | grep docker
 ... docker
 
+| Docker-Compose| Kubernetes |
+| :--- | :--- |
+| `$ chmod a=rwx docker/prometheus/prometheus` | `$ helm install dnation-ping ./k8s` |
+| `$ docker-compose up -d -f /docker` |
+
+
 # Launch
 cd ping/docker
 chmod a=rwx prometheus/prometheus
@@ -35,10 +41,23 @@ docker-compose up -d
 docker-compose logs | grep ERROR
 ```
 
-
 #### Kubernetes
 ```bash
 helm install dnation-ping ./k8s
+```
+
+#### dNation custom installation
+
+We currently support and actively maintain one custom scenario to meet [dNation](https://www.dnation.tech/)
+installation requirements.
+
+* [dNation custom configuration](k8s/values-dnation.yaml)
+
+
+
+```bash
+kubectl create namespace dnation-ping
+helm install dnation-ping ./k8s --namespace dnation-ping -f k8s/values-dnation.yaml
 ```
 
 ## Usage
@@ -46,6 +65,10 @@ After installation:
 * http://localhost:3001/
 * Username: `admin`
 * Password : `pass`
+
+#### dNation
+
+* Password : `sl7+E4GzhV568`
 
 ## Modifications
 ### docker-compose
