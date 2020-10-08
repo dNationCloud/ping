@@ -1,3 +1,6 @@
+# ping dNation k8s cluster installation
+# $ kubectl create namespace dnation-ping
+# $ helm install dnation-ping ./k8s --namespace dnation-ping -f k8s/values-dnation.yaml
 dnation:
   ingress:
     enabled: true
