@@ -46,29 +46,11 @@ docker-compose logs | grep ERROR
 helm install dnation-ping ./k8s
 ```
 
-#### dNation custom installation
-
-We currently support and actively maintain one custom scenario to meet [dNation](https://www.dnation.tech/)
-installation requirements.
-
-* [dNation custom configuration](k8s/values-dnation.yaml)
-
-
-
-```bash
-kubectl create namespace dnation-ping
-helm install dnation-ping ./k8s --namespace dnation-ping -f k8s/values-dnation.yaml
-```
-
 ## Usage
 After installation:
 * http://localhost:3001/
 * Username: `admin`
 * Password : `pass`
-
-#### dNation
-
-* Password : `sl7+E4GzhV568`
 
 ## Modifications
 ### docker-compose
