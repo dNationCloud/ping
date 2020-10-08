@@ -10,6 +10,15 @@ keywords:
   - prometheus
   - blackbox-exporter
 home: https://git.ifne.eu/dnation/ping
+dependencies:
+- name: prometheus
+  version: 11.16.*
+  repository: https://github.com/prometheus-community/helm-charts/tree/main/charts/prometheus
+  condition: prometheus.enabled
+- name: grafana
+  version: 5.7.*
+  repository: https://github.com/grafana/helm-charts/tree/main/charts/grafana
+  condition: grafana.enabled
 maintainers:
 - name: dnation
   email: admin@dnation.tech
