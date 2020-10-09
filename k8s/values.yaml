@@ -5,6 +5,7 @@ dnation:
     enabled: false
 
 grafana:
+    enabled: true
     adminUser: "admin"
     adminPassword: "pass"
     replicas: 1
@@ -32,10 +33,8 @@ grafana:
     }
     service:
       type: ClusterIP
-      port: 80
+      port: 3000
       targetPort: 3000
-      annotations: { }
-      labels: { }
       portName: service
     extraConfigmapMounts:
     - name: dnation-ping-icon
@@ -46,20 +45,55 @@ grafana:
 
 
 prometheus:
-  service:
-    type: NodePort
-    nodePort: 30909
-    port: 9090
-    targetPort: 9090
-  global:
-    scrapeInterval: 10s
-  persistence:
-    enabled: false
-  targets:
-  - 1.1.1.1
-  - 184.51.10.83
-  - 193.17.47.1
-  - google.com
-  - vyznanie.sk
-  - zob.sk
-
+  enabled: true
+  server:
+    enabled: true
+    name: server
+    configPath: /etc/config/prometheus.yml
+    global:
+      scrapeInterval: 10s
+    extraArgs: {
+    - --storage.tsdb.path=/prometheus
+    - --storage.tsdb.retention.time=365d
+    - --query.lookback-delta=2m
+    - --web.listen-address=0.0.0.0:9090
+    }
+    emptyDir:
+      sizeLimit: "4Gi"
+    replicaCount: 1
+    service:
+      servicePort: 9090
+        type: ClusterIP
+    prometheus.yml:
+      scrape_configs:
+        - job_name: prometheus
+          metrics_path: /probe
+          params:
+            module: [ icmp_ipv4 ]
+          static_configs:
+            - targets:
+                - 1.1.1.1
+                - 184.51.10.83
+                - 193.17.47.1
+                - google.com
+                - vyznanie.sk
+                - zob.sk
+          relabel_configs:
+            - source_labels: [ __address__ ]
+              target_label: __param_target
+            - source_labels: [ __param_target ]
+              target_label: instance
+            - target_label: __address__
+              replacement: localhost:9115
+    sidecarContainers:
+      - name: ping-blackbox
+        image: prom/blackbox-exporter:master
+        volumeMounts:
+        - name: config-blackbox
+        mountPath: "/etc/blackbox_exporter"
+        readOnly: true
+    extraVolumes: [
+      - name: config-blackbox
+        configMap:
+          name: blackbox-config
+    ]
