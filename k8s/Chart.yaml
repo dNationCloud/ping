@@ -12,15 +12,16 @@ keywords:
 home: https://git.ifne.eu/dnation/ping
 dependencies:
 - name: prometheus
-  version: 11.16.*
-  repository: https://github.com/prometheus-community/helm-charts/tree/main/charts/prometheus
+  version: "11.16.*"
+  repository: https://prometheus-community.github.io/helm-charts
   condition: prometheus.enabled
 - name: grafana
-  version: 5.7.*
-  repository: https://github.com/grafana/helm-charts/tree/main/charts/grafana
+  version: "5.7.*"
+  repository: https://grafana.github.io/helm-charts
   condition: grafana.enabled
 maintainers:
 - name: dnation
   email: admin@dnation.tech
-icon: https://storage.googleapis.com/ifne.eu/public/dNation_ping_logo.svg
+icon: https://storage.googleapis.com/ifne.eu/public/icons/dnation_ping.svg
+
 

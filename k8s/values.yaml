@@ -1,9 +1,3 @@
-dnation:
-  ingress:
-    enabled: false
-  certificate:
-    enabled: false
-
 grafana:
     enabled: true
     adminUser: "admin"
@@ -11,17 +5,13 @@ grafana:
     replicas: 1
     deploymentStrategy:
       type: RollingUpdate
-    env: {
-      env:
-      - name: GF_DASHBOARDS_DEFAULT_HOME_DASHBOARD_PATH
-        valueFrom: /etc/grafana/dashboards-json/ping-dashboard.json
-    }
-    dashboards: {
+    env:
+      GF_DASHBOARDS_DEFAULT_HOME_DASHBOARD_PATH : "/etc/grafana/dashboards-json/ping-dashboard.json"
+    dashboards:
       default:
         custom-dashboard:
           file: dashboards/ping-dashboard.json
-    }
-    datasources: {
+    datasources:
       datasources.yaml:
         apiVersion: 1
         datasources:
@@ -30,7 +20,6 @@ grafana:
           access: proxy
           url: http://prometheus:9090
           isDefault: true
-    }
     service:
       type: ClusterIP
       port: 3000
@@ -46,24 +35,32 @@ grafana:
 
 prometheus:
   enabled: true
+  alertmanager:
+    enabled: false
+  nodeExporter:
+    enabled: false
+  pushgateway:
+    enabled: false
+  persistence:
+    enabled: false
   server:
     enabled: true
     name: server
     configPath: /etc/config/prometheus.yml
+    retention: 365d
     global:
-      scrapeInterval: 10s
-    extraArgs: {
-    - --storage.tsdb.path=/prometheus
-    - --storage.tsdb.retention.time=365d
-    - --query.lookback-delta=2m
-    - --web.listen-address=0.0.0.0:9090
-    }
+      scrape_interval: 10s
+    extraArgs:
+      query.lookback-delta: 2m
+      web.listen-address: 0.0.0.0:9090
+    persistentVolume:
+      enabled: false
     emptyDir:
       sizeLimit: "4Gi"
     replicaCount: 1
     service:
       servicePort: 9090
-        type: ClusterIP
+      type: ClusterIP
     prometheus.yml:
       scrape_configs:
         - job_name: prometheus
@@ -90,10 +87,9 @@ prometheus:
         image: prom/blackbox-exporter:master
         volumeMounts:
         - name: config-blackbox
-        mountPath: "/etc/blackbox_exporter"
-        readOnly: true
-    extraVolumes: [
+          mountPath: "/etc/blackbox_exporter"
+          readOnly: true
+    extraVolumes:
       - name: config-blackbox
         configMap:
           name: blackbox-config
-    ]

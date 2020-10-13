@@ -9,13 +9,13 @@ networking:
 nodes:
 # the control plane node config
 - role: control-plane
-  extraPortMappings:
+#  extraPortMappings:
 # Grafana UI port forward 3001 on the host to 30071 on cluster node
-  - containerPort: 30071
-    hostPort: 3001
+#  - containerPort: 30071
+#    hostPort: 3001
 # Prometheus UI port forward 3002 on the host to 30909 on cluster node
-  - containerPort: 30909
-    hostPort: 3002
+#  - containerPort: 30909
+#    hostPort: 3002
 # the three workers
 - role: worker
 - role: worker

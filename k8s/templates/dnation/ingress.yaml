@@ -1,3 +1,4 @@
+{{- if .Values.dnation }}
 {{- if .Values.dnation.ingress.enabled }}
 apiVersion: extensions/v1beta1
 kind: Ingress
@@ -18,4 +19,5 @@ spec:
    - hosts:
      - ping.dnation.tech
      secretName: ping.dnation.tech
+{{- end -}}
 {{- end -}}

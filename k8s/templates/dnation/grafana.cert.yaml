@@ -1,3 +1,4 @@
+{{- if .Values.dnation }}
 {{- if .Values.dnation.certificate.enabled }}
 apiVersion: certmanager.k8s.io/v1alpha1
 kind: Certificate
@@ -10,4 +11,5 @@ spec:
   commonName: ping.dnation.tech
   dnsNames:
   - ping.dnation.tech
+{{- end -}}
 {{- end -}}
