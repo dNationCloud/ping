@@ -5,4 +5,4 @@
 *.tmp
 # helm/charts
 release/*
-test/
+test/*
