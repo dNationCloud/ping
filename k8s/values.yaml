@@ -6,11 +6,7 @@ grafana:
     deploymentStrategy:
       type: RollingUpdate
     env:
-      GF_DASHBOARDS_DEFAULT_HOME_DASHBOARD_PATH : "/etc/grafana/dashboards-json/ping-dashboard.json"
-    dashboards:
-      default:
-        custom-dashboard:
-          file: dashboards/ping-dashboard.json
+      GF_DASHBOARDS_DEFAULT_HOME_DASHBOARD_PATH : "/var/lib/grafana/dashboards/default/Ping.json"
     datasources:
       datasources.yaml:
         apiVersion: 1
@@ -31,6 +27,10 @@ grafana:
       subPath: grafana_icon.svg
       configMap: dnation-ping-icon
       readOnly: true
+    - name: ping-dashboard
+      mountPath: /var/lib/grafana/dashboards/default
+      configMap: ping-dashboard
+      readOnly: true
 
 
 prometheus:
@@ -46,6 +46,7 @@ prometheus:
   server:
     enabled: true
     name: server
+    fullnameOverride: prometheus
     configPath: /etc/config/prometheus.yml
     retention: 365d
     global:
@@ -61,27 +62,6 @@ prometheus:
     service:
       servicePort: 9090
       type: ClusterIP
-    prometheus.yml:
-      scrape_configs:
-        - job_name: prometheus
-          metrics_path: /probe
-          params:
-            module: [ icmp_ipv4 ]
-          static_configs:
-            - targets:
-                - 1.1.1.1
-                - 184.51.10.83
-                - 193.17.47.1
-                - google.com
-                - vyznanie.sk
-                - zob.sk
-          relabel_configs:
-            - source_labels: [ __address__ ]
-              target_label: __param_target
-            - source_labels: [ __param_target ]
-              target_label: instance
-            - target_label: __address__
-              replacement: localhost:9115
     sidecarContainers:
       - name: ping-blackbox
         image: prom/blackbox-exporter:master
@@ -93,3 +73,24 @@ prometheus:
       - name: config-blackbox
         configMap:
           name: blackbox-config
+  extraScrapeConfigs: |
+    - job_name: blackbox
+      metrics_path: /probe
+      params:
+        module: [ icmp_ipv4 ]
+      static_configs:
+        - targets:
+            - 1.1.1.1
+            - 184.51.10.83
+            - 193.17.47.1
+            - google.com
+            - vyznanie.sk
+            - zob.sk
+      relabel_configs:
+        - source_labels: [ __address__ ]
+          target_label: __param_target
+        - source_labels: [ __param_target ]
+          target_label: instance
+        - target_label: __address__
+          replacement: localhost:9115
+
