@@ -9,10 +9,10 @@ networking:
 nodes:
 # the control plane node config
 - role: control-plane
-#  extraPortMappings:
+  extraPortMappings:
 # Grafana UI port forward 3001 on the host to 30071 on cluster node
-#  - containerPort: 30071
-#    hostPort: 3001
+  - containerPort: 3000
+    hostPort: 3000
 # Prometheus UI port forward 3002 on the host to 30909 on cluster node
 #  - containerPort: 30909
 #    hostPort: 3002
@@ -27,11 +27,11 @@ kubeadmConfigPatches:
   evictionHard:
     nodefs.available: "0%"
 # patch it further using a JSON 6902 patch
-kubeadmConfigPatchesJSON6902:
-- group: kubeadm.k8s.io
-  version: v1beta2
-  kind: ClusterConfiguration
-  patch: |
-    - op: add
-      path: /apiServer/certSANs/-
-      value: my-hostname  
+#kubeadmConfigPatchesJSON6902:
+#- group: kubeadm.k8s.io
+#  version: v1beta2
+#  kind: ClusterConfiguration
+#  patch: |
+#    - op: add
+#      path: /apiServer/certSANs/-
+#      value: my-hostname

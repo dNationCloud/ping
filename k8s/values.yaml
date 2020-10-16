@@ -62,17 +62,6 @@ prometheus:
     service:
       servicePort: 9090
       type: ClusterIP
-    sidecarContainers:
-      - name: ping-blackbox
-        image: prom/blackbox-exporter:master
-        volumeMounts:
-        - name: config-blackbox
-          mountPath: "/etc/blackbox_exporter"
-          readOnly: true
-    extraVolumes:
-      - name: config-blackbox
-        configMap:
-          name: blackbox-config
   extraScrapeConfigs: |
     - job_name: blackbox
       metrics_path: /probe
@@ -86,11 +75,39 @@ prometheus:
             - google.com
             - vyznanie.sk
             - zob.sk
+            - prometheus:9090
       relabel_configs:
         - source_labels: [ __address__ ]
           target_label: __param_target
         - source_labels: [ __param_target ]
           target_label: instance
         - target_label: __address__
-          replacement: localhost:9115
+          replacement: blackbox:9115
+
+blackbox:
+  enabled: true
+  replicas: 1
+  fullnameOverride: blackbox
+  restartPolicy: Always
+  strategy:
+    type: RollingUpdate
+  image:
+    repository: prom/blackbox-exporter
+    tag: v0.17.0
+    pullPolicy: IfNotPresent
+  runAsUser: 1000
+  readOnlyRootFilesystem: true
+  runAsNonRoot: false
+  secretConfig: false
+  config:
+    modules:
+      icmp_ipv4:
+        prober: icmp
+        icmp:
+          preferred_ip_protocol: "ip4"
+  allowIcmp: true
+  service:
+    type: ClusterIP
+    port: 9115
+    targetPort: 9115
 
