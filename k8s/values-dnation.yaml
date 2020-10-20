@@ -18,6 +18,10 @@ grafana:
   replicas: 1
 
 prometheus:
+  server:
+    retention: 365d
+    global:
+      scrape_interval: 10s
   service:
     type: NodePort
     nodePort: 30909

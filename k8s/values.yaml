@@ -1,40 +1,40 @@
 grafana:
-    enabled: true
-    adminUser: "admin"
-    adminPassword: "pass"
-    replicas: 1
-    deploymentStrategy:
-      type: RollingUpdate
-    env:
-      GF_DASHBOARDS_DEFAULT_HOME_DASHBOARD_PATH : "/var/lib/grafana/dashboards/default/Ping.json"
-    datasources:
-      datasources.yaml:
-        apiVersion: 1
-        datasources:
-        - name: Prometheus
-          type: prometheus
-          access: proxy
-          url: http://prometheus:9090
-          isDefault: true
-    service:
-      type: ClusterIP
-      port: 3000
-      targetPort: 3000
-      portName: service
-    extraConfigmapMounts:
-    - name: dnation-ping-icon
-      mountPath: /usr/share/grafana/public/img/grafana_icon.svg
-      subPath: grafana_icon.svg
-      configMap: dnation-ping-icon
-      readOnly: true
-    - name: ping-dashboard
-      mountPath: /var/lib/grafana/dashboards/default
-      configMap: ping-dashboard
-      readOnly: true
-
+  enabled: true
+  adminUser: "admin"
+  adminPassword: "pass"
+#  replicas: 1
+#  deploymentStrategy:
+#    type: RollingUpdate
+  env:
+    GF_DASHBOARDS_DEFAULT_HOME_DASHBOARD_PATH : "/var/lib/grafana/dashboards/default/Ping.json"
+  datasources:
+    datasources.yaml:
+      apiVersion: 1
+      datasources:
+      - name: Prometheus
+        type: prometheus
+        access: proxy
+        url: http://prometheus:9090
+        isDefault: true
+#  service:
+#    type: ClusterIP
+#    port: 3000
+#    targetPort: 3000
+#    portName: service
+  extraConfigmapMounts:
+  - name: dnation-ping-icon
+    mountPath: /usr/share/grafana/public/img/grafana_icon.svg
+    subPath: grafana_icon.svg
+    configMap: dnation-ping-icon
+    readOnly: true
+  - name: ping-dashboard
+    mountPath: /var/lib/grafana/dashboards/default
+    configMap: ping-dashboard
+    readOnly: true
 
 prometheus:
   enabled: true
+  fullnameOverride: prometheus
   alertmanager:
     enabled: false
   nodeExporter:
@@ -45,23 +45,20 @@ prometheus:
     enabled: false
   server:
     enabled: true
-    name: server
-    fullnameOverride: prometheus
+#    name: server
+#    fullnameOverride: prometheus
     configPath: /etc/config/prometheus.yml
-    retention: 365d
-    global:
-      scrape_interval: 10s
-    extraArgs:
-      query.lookback-delta: 2m
-      web.listen-address: 0.0.0.0:9090
-    persistentVolume:
-      enabled: false
+#    extraArgs:
+#      query.lookback-delta: 2m
+#      web.listen-address: 0.0.0.0:9090
+#    persistentVolume:
+#      enabled: false
     emptyDir:
       sizeLimit: "4Gi"
-    replicaCount: 1
-    service:
-      servicePort: 9090
-      type: ClusterIP
+#    replicaCount: 1
+#    service:
+#      servicePort: 9090
+#      type: ClusterIP
   extraScrapeConfigs: |
     - job_name: blackbox
       metrics_path: /probe
@@ -69,36 +66,23 @@ prometheus:
         module: [ icmp_ipv4 ]
       static_configs:
         - targets:
-            - 1.1.1.1
-            - 184.51.10.83
-            - 193.17.47.1
-            - google.com
-            - vyznanie.sk
-            - zob.sk
-            - prometheus:9090
+          - 1.1.1.1
+          - 184.51.10.83
+          - 193.17.47.1
+          - google.com
+          - vyznanie.sk
+          - zob.sk
       relabel_configs:
-        - source_labels: [ __address__ ]
-          target_label: __param_target
-        - source_labels: [ __param_target ]
-          target_label: instance
-        - target_label: __address__
-          replacement: blackbox:9115
+      - source_labels: [ __address__ ]
+        target_label: __param_target
+      - source_labels: [ __param_target ]
+        target_label: instance
+      - target_label: __address__
+        replacement: blackbox:9115
 
-blackbox:
+prometheus-blackbox-exporter:
   enabled: true
-  replicas: 1
   fullnameOverride: blackbox
-  restartPolicy: Always
-  strategy:
-    type: RollingUpdate
-  image:
-    repository: prom/blackbox-exporter
-    tag: v0.17.0
-    pullPolicy: IfNotPresent
-  runAsUser: 1000
-  readOnlyRootFilesystem: true
-  runAsNonRoot: false
-  secretConfig: false
   config:
     modules:
       icmp_ipv4:
@@ -106,8 +90,3 @@ blackbox:
         icmp:
           preferred_ip_protocol: "ip4"
   allowIcmp: true
-  service:
-    type: ClusterIP
-    port: 9115
-    targetPort: 9115
-
