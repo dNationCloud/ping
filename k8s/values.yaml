@@ -14,11 +14,11 @@ grafana:
       - name: Prometheus
         type: prometheus
         access: proxy
-        url: http://prometheus:9090
+        url: prometheus:9090
         isDefault: true
-#  service:
+  service:
 #    type: ClusterIP
-#    port: 3000
+    port: 3000
 #    targetPort: 3000
 #    portName: service
   extraConfigmapMounts:
@@ -34,7 +34,6 @@ grafana:
 
 prometheus:
   enabled: true
-  fullnameOverride: prometheus
   alertmanager:
     enabled: false
   nodeExporter:
@@ -45,6 +44,7 @@ prometheus:
     enabled: false
   server:
     enabled: true
+    fullnameOverride: prometheus
 #    name: server
 #    fullnameOverride: prometheus
     configPath: /etc/config/prometheus.yml
@@ -56,8 +56,8 @@ prometheus:
     emptyDir:
       sizeLimit: "4Gi"
 #    replicaCount: 1
-#    service:
-#      servicePort: 9090
+    service:
+      servicePort: 9090
 #      type: ClusterIP
   extraScrapeConfigs: |
     - job_name: blackbox
