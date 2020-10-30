@@ -1,7 +1,7 @@
 # this config file contains all config fields with comments
 # NOTE: this is not a particularly useful config file
 kind: Cluster
-apiVersion: kind.x-k8s.io/v1alpha4
+apiVersion: kind.x-chart.io/v1alpha4
 networking:
   apiServerAddress: 127.0.0.1
   apiServerPort: 34323
@@ -26,7 +26,7 @@ kubeadmConfigPatches:
     nodefs.available: "0%"
 # patch it further using a JSON 6902 patch
 #kubeadmConfigPatchesJSON6902:
-#- group: kubeadm.k8s.io
+#- group: kubeadm.chart.io
 #  version: v1beta2
 #  kind: ClusterConfiguration
 #  patch: |
