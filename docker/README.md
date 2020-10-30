@@ -1,10 +1,13 @@
-## Getting Started 
-### Prerequisites
+![alt text](../images/dNPing_logo.png "dNation Ping logo")
+-
+
+## Installation
+Prerequisites
 
 * [Docker](https://www.docker.com/)
 * [Docker-compose](https://docs.docker.com/compose/) **>= *v3.0***
 
-### Installation
+Install dNation-Ping
 
 ```bash
 umask 0022

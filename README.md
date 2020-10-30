@@ -1,35 +1,27 @@
 ![alt text](images/dNPing_logo.png "dNation Ping logo")
 -
-dNation Ping is a transparent tool for pinging selected IP addresses or domain names in set intervals with results displayed on graph.
+
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
+[![Artifact HUB](https://img.shields.io/endpoint?url=https://artifacthub.io/badge/repository/dnationcloud)](https://artifacthub.io/packages/search?repo=dnationcloud)
+
+dNation Ping is a transparent tool for pinging selected IP addresses or domain names in set intervals with results displayed on graph in Grafana.
 
 ![alt text](images/ping_grafana_screenshot.png "dNation Ping GUI")
 
-## Getting Started 
-### Prerequisites
+# Deployments
 
-[Kubernetes](https://kubernetes.io/)
+For more information about dNation Ping deployment in docker, please read [dNation Ping in Docker](docker/README.md)
 
-### Installation
+For more information about dNation Ping Helm Chart, please read [dNation Ping Helm Chart](chart/README.md)
 
-#### Kubernetes
-```bash
-helm install dnation-ping ./k8s
-```
+# Contribution guidelines
 
-## Usage
+If you want to contribute, please read following:
+1. [Contribution Guidelines](CONTRIBUTING.md)
+1. [Code of Conduct](CODE_OF_CONDUCT.md)
+1. [How To](helpers/README.md) simplify your local development
 
-
-## Modifications
-   
-### kubernetes
-
-* **See k8s/values.yaml file for possible modifications**    
-    
-## Built With
-
-* [Prometheus](https://prometheus.io/)
-* [Blackbox-exporter](https://github.com/prometheus/blackbox_exporter/blob/master/README.md)
-* [Grafana](https://grafana.com/)
+We use GitHub issues to manage requests and bugs, please visit our discussion forum if you have any questions.
 
 
 
