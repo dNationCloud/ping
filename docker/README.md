@@ -1,4 +1,4 @@
-![alt text](../images/dNPing_logo.png "dNation Ping logo")
+![alt text](https://cdn.ifne.eu/public/icons/dnation_ping_long.png "dNation Ping logo")
 -
 
 ## Installation
