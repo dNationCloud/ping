@@ -1,9 +1,9 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: dnation-ping-icon
+  name: dnation-logo
 data:
-  grafana_icon.svg: |
+  dnation_logo.svg: |
     <?xml version="1.0" encoding="UTF-8" standalone="no"?>
     <svg
        xmlns:dc="http://purl.org/dc/elements/1.1/"

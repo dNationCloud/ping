@@ -2,11 +2,6 @@ grafana:
   enabled: true
   adminUser: "admin"
   adminPassword: "pass"
-#  replicas: 1
-#  deploymentStrategy:
-#    type: RollingUpdate
-  env:
-    GF_DASHBOARDS_DEFAULT_HOME_DASHBOARD_PATH : "/var/lib/grafana/dashboards/default/Ping.json"
   datasources:
     datasources.yaml:
       apiVersion: 1
@@ -17,20 +12,54 @@ grafana:
         url: prometheus:9090
         isDefault: true
   service:
-#    type: ClusterIP
     port: 3000
-#    targetPort: 3000
-#    portName: service
+  securityContext:
+    runAsUser: 0
+    runAsGroup: 0
+    fsGroup: 0
+  ## Define command to be executed at startup of grafana container
+  ##
+  command:
+    - "/bin/sh"
+    - "-c"
+    - "/etc/secrets/dnation_brand.sh && /run.sh"
+  ## Inject dNation branding
+  ##
   extraConfigmapMounts:
-  - name: dnation-ping-icon
-    mountPath: /usr/share/grafana/public/img/grafana_icon.svg
-    subPath: grafana_icon.svg
-    configMap: dnation-ping-icon
-    readOnly: true
-  - name: ping-dashboard
-    mountPath: /var/lib/grafana/dashboards/default
-    configMap: ping-dashboard
-    readOnly: true
+    - name: ping-dashboard
+      mountPath: /var/lib/grafana/dashboards/default
+      configMap: ping-dashboard
+      readOnly: true
+    - name: dnation-logo
+      mountPath: /usr/share/grafana/public/img/dnation_logo.svg
+      subPath: dnation_logo.svg
+      configMap: dnation-logo
+    - name: dnation-home
+      mountPath: /usr/share/grafana/public/dashboards/home.json
+      subPath: home.json
+      configMap: dnation-home
+  extraSecretMounts:
+    - name: dnation-brand
+      mountPath: /etc/secrets
+      secretName: dnation-brand
+      defaultMode: 0755
+  dashboardProviders:
+    dashboardproviders.yaml:
+      apiVersion: 1
+      providers:
+      - name: 'dnation'
+        orgId: 1
+        folder: ''
+        type: file
+        disableDeletion: false
+        editable: true
+        options:
+          path: /var/lib/grafana/dashboards/default
+  dashboards:
+    dnation:
+      ping-dashboard:
+        file: Ping.json
+
 
 prometheus:
   enabled: true
@@ -40,25 +69,18 @@ prometheus:
     enabled: false
   pushgateway:
     enabled: false
+  kubeStateMetrics:
+    enabled: false
   persistence:
     enabled: false
   server:
     enabled: true
     fullnameOverride: prometheus
-#    name: server
-#    fullnameOverride: prometheus
     configPath: /etc/config/prometheus.yml
-#    extraArgs:
-#      query.lookback-delta: 2m
-#      web.listen-address: 0.0.0.0:9090
-#    persistentVolume:
-#      enabled: false
     emptyDir:
       sizeLimit: "4Gi"
-#    replicaCount: 1
     service:
       servicePort: 9090
-#      type: ClusterIP
   extraScrapeConfigs: |
     - job_name: blackbox
       metrics_path: /probe

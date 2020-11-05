@@ -26,10 +26,6 @@ kind create cluster --config helpers/ping_kind_config.yaml --image kindest/node:
 Install dNation Ping
 
 ```bash
-# Add dNation helm repository
-helm repo add dnationcloud https://dnationcloud.github.io/helm-hub/
-helm repo update
-
 # Install dNation Ping Helm chart
-helm install dnation-ping dnationcloud/dnation-ping -f chart/values.yaml 
+helm install dnation-ping ./chart -f chart/values.yaml 
 ```

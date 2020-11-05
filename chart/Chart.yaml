@@ -25,7 +25,7 @@ dependencies:
   condition: prometheus-blackbox-exporter.enabled
 maintainers:
 - name: dnation
-  email: admin@dnation.tech
-icon: https://storage.googleapis.com/ifne.eu/public/icons/dnation_ping.svg
+  email: cloud@dnation.cloud
+icon: https://cdn.ifne.eu/public/icons/dnation_ping.svg
 
 

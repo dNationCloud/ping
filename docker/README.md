@@ -11,7 +11,7 @@ Install dNation-Ping
 
 ```bash
 umask 0022
-git clone https://git.ifne.eu/dnation/ping.git
+git clone https://github.com/dNationCloud/ping.git
 ```
 
 * Add user to group `docker`, logout/login if necessary
@@ -21,11 +21,9 @@ git clone https://git.ifne.eu/dnation/ping.git
 groups | grep docker
 ... docker
 
-| Docker-Compose| Kubernetes |
-| :--- | :--- |
-| `$ chmod a=rwx docker/prometheus/prometheus` | `$ helm install dnation-ping ./k8s` |
-| `$ docker-compose up -d -f /docker` |
-
+# Docker-Compose
+chmod a=rwx docker/prometheus/prometheus
+docker-compose up -d -f /docker
 
 # Launch
 cd ping/docker

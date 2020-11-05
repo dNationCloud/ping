@@ -8,7 +8,7 @@ dNation Ping is a transparent tool for pinging selected IP addresses or domain n
 
 ![alt text](images/ping_grafana_screenshot.png "dNation Ping GUI")
 
-# Deployments
+# Installation
 
 For more information about dNation Ping deployment in docker, please read [dNation Ping in Docker](docker/README.md)
 
