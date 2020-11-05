@@ -1,6 +1,10 @@
-- name: 'default'       # name of this dashboard configuration (not dashboard itself)
-  org_id: 1             # id of the org to hold the dashboard
-  folder: ''            # name of the folder to put the dashboard (http://docs.grafana.org/v5.0/reference/dashboard_folders/)
-  type: 'file'          # type of dashboard description (json files)
+- name: 'default'               # name of this dashboard configuration (not dashboard itself)
+  org_id: 1                     # id of the org to hold the dashboard
+  folder: ''                    # name of the folder to put the dashboard (http://docs.grafana.org/v5.0/reference/dashboard_folders/)
+  type: 'file'                  # type of dashboard description (json files)
+  disableDeletion: true        # <bool> disable dashboard deletion
+  updateIntervalSeconds: 30     # <int> how often Grafana will scan for changed dashboards
+  allowUiUpdates: false         # <bool> allow updating provisioned dashboards from the UI
   options:
-    folder: '/etc/grafana/dashboards-json'       # where dashboards are
+    path: '/etc/grafana/dashboards-json'       # where dashboards are
+    foldersFromFilesStructure: false           # <bool> use folder names from filesystem to create folders in Grafana

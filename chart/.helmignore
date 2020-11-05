@@ -3,3 +3,6 @@
 *.swp
 *.bak
 *.tmp
+# helm/charts
+release/*
+test/*

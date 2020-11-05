@@ -1,0 +1,10 @@
+dNation Ping has been installed.
+Check its status by running:
+    kubectl --namespace {{ .Release.Namespace }} get pods
+
+If you need to access one of the pods from outside of the cluster, you need to expose pod's service
+with $ kubectl port-forward svc/(svc-name) (port).
+For example to expose grafana: $ kubectl port-forward svc/ping-grafana 3000
+
+
+Visit https://www.dNation.cloud for detailed information

@@ -1,81 +1,27 @@
-![alt text](images/dNPing_logo.png "dNation Ping logo")
+![alt text](https://cdn.ifne.eu/public/icons/dnation_ping_long.png "dNation Ping logo")
 -
-dNation Ping is a transparent tool for pinging selected IP addresses or domain names in set intervals with results displayed on graph.
+
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
+[![Artifact HUB](https://img.shields.io/endpoint?url=https://artifacthub.io/badge/repository/dnationcloud)](https://artifacthub.io/packages/search?repo=dnationcloud)
+
+dNation Ping is a transparent tool for pinging selected IP addresses or domain names in set intervals with results displayed on graph in Grafana.
 
 ![alt text](images/ping_grafana_screenshot.png "dNation Ping GUI")
 
-## Getting Started 
-### Prerequisites
+# Installation
 
-* [Docker](https://www.docker.com/)
-* [Docker-compose](https://docs.docker.com/compose/) **>= *v3.0*** / [Kubernetes](https://kubernetes.io/)
+For more information about dNation Ping deployment in docker, please read [dNation Ping in Docker](docker/README.md)
 
-### Installation
+For more information about dNation Ping Helm Chart, please read [dNation Ping Helm Chart](chart/README.md)
 
-```bash
-umask 0022
-git clone https://git.ifne.eu/dnation/ping.git
-```
+# Contribution guidelines
 
-#### Docker-Compose
+If you want to contribute, please read following:
+1. [Contribution Guidelines](CONTRIBUTING.md)
+1. [Code of Conduct](CODE_OF_CONDUCT.md)
+1. [How To](helpers/README.md) simplify your local development
 
-* Add user to group `docker`, logout/login if necessary
-
-```bash
-# Is used in docker group?
-groups | grep docker
-... docker
-
-# Launch
-cd ping/docker
-chmod a=rwx prometheus/prometheus
-docker-compose up -d
-
-# Debugging
-docker-compose logs | grep ERROR
-```
-
-
-#### Kubernetes
-```bash
-helm install dnation-ping ./k8s
-```
-
-## Usage
-After installation:
-* http://localhost:3001/
-* Username: `admin`
-* Password : `pass`
-
-## Modifications
-### docker-compose
-
-| env variable | what it represents |
-| :--- | :--- |
-| ADMIN_USER | grafana UI username |
-| ADMIN_PASSWORD | grafana UI password |
-| PING_PORT | default grafana UI port |
-
-* **Edit pinging targets**
-
-    - Edit targets in /docker/prometheus/targets.json file *(don't use vim file editor)*
-    - Save file
-    - Applied changes should appear in GUI within 5 minutes period
-    
-### kubernetes
-
-* **See k8s/values.yaml file for possible modifications**    
-    
-### More Info
-**Kubernetes related**
-
- - *nodePort is used to expose Grafana UI (30071) and Prometheus UI (30909)*
-
-## Built With
-
-* [Prometheus](https://prometheus.io/)
-* [Blackbox-exporter](https://github.com/prometheus/blackbox_exporter/blob/master/README.md)
-* [Grafana](https://grafana.com/)
+We use GitHub issues to manage requests and bugs, please visit our discussion forum if you have any questions.
 
 
 

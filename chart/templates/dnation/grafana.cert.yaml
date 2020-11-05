@@ -1,0 +1,15 @@
+{{- if .Values.dnation }}
+{{- if .Values.dnation.certificate.enabled }}
+apiVersion: certmanager.chart.io/v1alpha1
+kind: Certificate
+metadata:
+  name: ping.dnation.cloud
+spec:
+  secretName: ping.dnation.cloud
+  issuerRef:
+    name: letsencrypt-prod
+  commonName: ping.dnation.cloud
+  dnsNames:
+  - ping.dnation.cloud
+{{- end -}}
+{{- end -}}

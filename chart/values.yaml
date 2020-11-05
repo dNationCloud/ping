@@ -1,0 +1,114 @@
+grafana:
+  enabled: true
+  adminUser: "admin"
+  adminPassword: "pass"
+  datasources:
+    datasources.yaml:
+      apiVersion: 1
+      datasources:
+      - name: Prometheus
+        type: prometheus
+        access: proxy
+        url: prometheus:9090
+        isDefault: true
+  service:
+    port: 3000
+  securityContext:
+    runAsUser: 0
+    runAsGroup: 0
+    fsGroup: 0
+  ## Define command to be executed at startup of grafana container
+  ##
+  command:
+    - "/bin/sh"
+    - "-c"
+    - "/etc/secrets/dnation_brand.sh && /run.sh"
+  ## Inject dNation branding
+  ##
+  extraConfigmapMounts:
+    - name: ping-dashboard
+      mountPath: /var/lib/grafana/dashboards/default
+      configMap: ping-dashboard
+      readOnly: true
+    - name: dnation-logo
+      mountPath: /usr/share/grafana/public/img/dnation_logo.svg
+      subPath: dnation_logo.svg
+      configMap: dnation-logo
+    - name: dnation-home
+      mountPath: /usr/share/grafana/public/dashboards/home.json
+      subPath: home.json
+      configMap: dnation-home
+  extraSecretMounts:
+    - name: dnation-brand
+      mountPath: /etc/secrets
+      secretName: dnation-brand
+      defaultMode: 0755
+  dashboardProviders:
+    dashboardproviders.yaml:
+      apiVersion: 1
+      providers:
+      - name: 'dnation'
+        orgId: 1
+        folder: ''
+        type: file
+        disableDeletion: false
+        editable: true
+        options:
+          path: /var/lib/grafana/dashboards/default
+  dashboards:
+    dnation:
+      ping-dashboard:
+        file: Ping.json
+
+
+prometheus:
+  enabled: true
+  alertmanager:
+    enabled: false
+  nodeExporter:
+    enabled: false
+  pushgateway:
+    enabled: false
+  kubeStateMetrics:
+    enabled: false
+  persistence:
+    enabled: false
+  server:
+    enabled: true
+    fullnameOverride: prometheus
+    configPath: /etc/config/prometheus.yml
+    emptyDir:
+      sizeLimit: "4Gi"
+    service:
+      servicePort: 9090
+  extraScrapeConfigs: |
+    - job_name: blackbox
+      metrics_path: /probe
+      params:
+        module: [ icmp_ipv4 ]
+      static_configs:
+        - targets:
+          - 1.1.1.1
+          - 184.51.10.83
+          - 193.17.47.1
+          - google.com
+          - vyznanie.sk
+          - zob.sk
+      relabel_configs:
+      - source_labels: [ __address__ ]
+        target_label: __param_target
+      - source_labels: [ __param_target ]
+        target_label: instance
+      - target_label: __address__
+        replacement: blackbox:9115
+
+prometheus-blackbox-exporter:
+  enabled: true
+  fullnameOverride: blackbox
+  config:
+    modules:
+      icmp_ipv4:
+        prober: icmp
+        icmp:
+          preferred_ip_protocol: "ip4"
+  allowIcmp: true
