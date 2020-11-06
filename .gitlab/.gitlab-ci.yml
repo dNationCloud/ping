@@ -57,8 +57,9 @@ test install ping:
 publish:
   stage: publish
   image: cfmanteiga/alpine-bash-curl-jq
-#  only:
-#    - master
+  only:
+    - master
+    - merge_requests
   script:
     - curl --fail --user "$IFNE_HELM_USER":"$IFNE_HELM_PASS" "$IFNE_HELM_URL" --upload-file chart/release/dnation-ping-*.tgz
   when: manual
