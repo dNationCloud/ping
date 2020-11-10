@@ -71,7 +71,7 @@ deploy:
     - master
   before_script:
     # https://git.ifne.eu/infra/k8s/-/wikis/Installation-of-k8s#workaround-for-please-ensure-your-ca-certificate-and-token-are-valid-issue
-    # - echo "138.201.245.222 kubernetes" >> /etc/hosts
+    - echo "138.201.245.222 kubernetes" >> /etc/hosts
     - helm repo add dnationcloud "$IFNE_HELM_URL"
     - helm repo update
     - helm search repo dnation
