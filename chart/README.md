@@ -1,4 +1,4 @@
-![alt text](../images/dNPing_logo.png "dNation Ping logo")
+![alt text](https://cdn.ifne.eu/public/icons/dnation_ping_long.png "dNation Ping logo")
 -
 
 Helm chart for [dNation Ping](https://github.com/dNationCloud/kubernetes-monitoring) deployment is built with:
@@ -16,7 +16,7 @@ dNation Ping Helm Chart is hosted in the [dNation helm repository](https://artif
 
 ```bash
 # Add dNation helm repository
-helm repo add dnationcloud https://dnationcloud.github.io/helm-hub/
+helm repo add dnationcloud https://nexus.ifne.eu/repository/ifne-helm-public/
 helm repo update
 
 # Install dNation Ping

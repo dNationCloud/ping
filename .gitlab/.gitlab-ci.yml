@@ -30,6 +30,7 @@ variables:
 stages:
   - build helm
   - test
+  - publish
 
 build helm package:
   stage: build helm
@@ -53,3 +54,11 @@ test install ping:
     - kind create cluster --config helpers/ping-kind-config.yaml --image kindest/node:v1.17.5
     - helm install ping chart/release/dnation-ping-*.tgz
 
+publish:
+  stage: publish
+  image: cfmanteiga/alpine-bash-curl-jq
+  only:
+    - master
+  script:
+    - curl --fail --user "$IFNE_HELM_USER":"$IFNE_HELM_PASS" "$IFNE_HELM_URL" --upload-file chart/release/dnation-ping-*.tgz
+  when: manual
