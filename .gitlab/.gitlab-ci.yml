@@ -31,6 +31,7 @@ stages:
   - build helm
   - test
   - publish
+  - deploy
 
 build helm package:
   stage: build helm
@@ -62,3 +63,24 @@ publish:
   script:
     - curl --fail --user "$IFNE_HELM_USER":"$IFNE_HELM_PASS" "$IFNE_HELM_URL" --upload-file chart/release/dnation-ping-*.tgz
   when: manual
+
+deploy:
+  stage: deploy
+  extends: .base
+  only:
+    - master
+  before_script:
+    # https://git.ifne.eu/infra/k8s/-/wikis/Installation-of-k8s#workaround-for-please-ensure-your-ca-certificate-and-token-are-valid-issue
+    # - echo "138.201.245.222 kubernetes" >> /etc/hosts
+    - helm repo add dnationcloud "$IFNE_HELM_URL"
+    - helm repo update
+    - helm search repo dnation
+  script:
+    - helm upgrade --install dnation-ping dnationcloud/dnation-ping -f ./chart/values-dnation.yaml
+  environment:
+    name: production
+    url: "$KUBE_URL"
+    kubernetes:
+      namespace: dnation-ping
+  when: manual
+
