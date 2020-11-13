@@ -48,9 +48,9 @@ test lint:
   before_script:
     - git fetch -p
     - git checkout origin/cicd/values-dnation -- values-dnation.yaml
-    script:
-      - helm lint chart -f chart/values.yaml
-      - helm lint chart -f values-dnation.yaml
+  script:
+    - helm lint chart -f chart/values.yaml
+    - helm lint chart -f values-dnation.yaml
 
 test install ping:
   stage: test
