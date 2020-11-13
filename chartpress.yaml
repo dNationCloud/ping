@@ -1,0 +1,6 @@
+charts:
+- name: chart
+  repo:
+    git: dNationCloud/helm-hub
+    published: https://dnationcloud.github.io/helm-hub/
+
