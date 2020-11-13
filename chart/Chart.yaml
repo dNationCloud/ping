@@ -1,6 +1,6 @@
 apiVersion: v2
 name: dnation-ping
-version: 0.1.1
+version: 0.1.2
 appVersion: 0.1.3
 description: dNation Ping is a transparent tool for pinging selected IP addresses or domain names in set intervals with results displayed on graph
 keywords:
