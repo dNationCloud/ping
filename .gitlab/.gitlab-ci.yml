@@ -11,7 +11,7 @@ variables:
     - privileged
   only:
     - merge_requests
-    - master
+    - main
 
 .test-install:
   extends: .base
@@ -45,8 +45,12 @@ build helm package:
 test lint:
   stage: test
   extends: .base
-  script:
-    - helm lint ./chart -f chart/values.yaml
+  before_script:
+    - git fetch -p
+    - git checkout origin/cicd/values-dnation -- values-dnation.yaml
+    script:
+      - helm lint chart -f chart/values.yaml
+      - helm lint chart -f values-dnation.yaml
 
 test install ping:
   stage: test
@@ -74,9 +78,11 @@ deploy:
     - echo "138.201.245.222 kubernetes" >> /etc/hosts
     - helm repo add dnationcloud "$IFNE_HELM_URL"
     - helm repo update
-    - helm search repo dnation
+    - helm search repo dnationcloud
+    - git fetch -p
+    - git checkout origin/cicd/values-dnation -- values-dnation.yaml
   script:
-    - helm upgrade --install dnation-ping dnationcloud/dnation-ping -f ./chart/values-dnation.yaml
+    - helm upgrade --install dnation-ping dnationcloud/dnation-ping -f values-dnation.yaml
   environment:
     name: production
     url: "$KUBE_URL"

@@ -1,10 +1,9 @@
 name: Release Chart
 
 on:
-  pull_request:
-#  push:
-#    branches:
-#    - main
+  push:
+    branches:
+    - main
     # Only if there are chart changes to release.
     paths:
     - 'chart/**'
