@@ -6,7 +6,7 @@ docker/prometheus/prometheus/data/
 *.iml
 
 # Helm files
-k8s/release/*
-k8s/charts/*
-k8s/Chart.lock
-k8s/test/*
+chart/release/*
+chart/charts/*
+chart/Chart.lock
+chart/test/*
