@@ -11,8 +11,6 @@ grafana:
         access: proxy
         url: prometheus:9090
         isDefault: true
-  service:
-    port: 3000
   securityContext:
     runAsUser: 0
     runAsGroup: 0
