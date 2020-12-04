@@ -1,4 +1,4 @@
-# Contributor Covenant Code of Conduct
+# dNation Ping Code of Conduct
 
 ## Our Pledge
 

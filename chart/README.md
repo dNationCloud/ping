@@ -22,4 +22,3 @@ helm repo update
 # Install dNation Ping
 helm install dnation-ping dnationcloud/dnation-ping
 ```
-

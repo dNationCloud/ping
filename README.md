@@ -22,17 +22,3 @@ If you want to contribute, please read following:
 1. [How To](helpers/README.md) simplify your local development
 
 We use GitHub issues to manage requests and bugs, please visit our discussion forum if you have any questions.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
