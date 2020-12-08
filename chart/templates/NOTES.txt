@@ -3,7 +3,7 @@ Check its status by running:
     kubectl --namespace {{ .Release.Namespace }} get pods
 
 If you need to access one of the pods from outside of the cluster, you need to expose pod's service
-with $ kubectl port-forward svc/(svc-name) (port).
+with $ kubectl port-forward svc/(svc-name) (port):80
 For example to expose grafana: $ kubectl port-forward svc/dnation-ping-grafana 3000:80
 
 

@@ -22,3 +22,7 @@ helm repo update
 # Install dNation Ping
 helm install dnation-ping dnationcloud/dnation-ping
 ```
+
+# Getting started
+
+Search for `Ping` dashboard. If you want to set the `Ping` dashboard as a home dashboard follow [here](https://grafana.com/docs/grafana/latest/administration/change-home-dashboard/#set-the-default-dashboard-through-preferences).
