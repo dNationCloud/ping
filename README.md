@@ -4,7 +4,7 @@
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 [![Artifact HUB](https://img.shields.io/endpoint?url=https://artifacthub.io/badge/repository/dnationcloud)](https://artifacthub.io/packages/search?repo=dnationcloud)
 
-dNation Ping is a transparent tool for pinging selected IP addresses or domain names in set intervals with results displayed on graph in Grafana.
+dNation Ping detects network connection problems by measuring ping response times of selected servers every 15 seconds. Runs inside Kubernetes cluster or on a single machine (within a docker container).
 
 ![alt text](images/ping_grafana_screenshot.png "dNation Ping GUI")
 
