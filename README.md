@@ -10,9 +10,9 @@ dNation Ping detects network connection problems by measuring ping response time
 
 # Installation
 
-For more information about dNation Ping deployment in docker, please read [dNation Ping in Docker](docker/README.md)
+For more information about dNation Ping deployment in docker, please read [dNation Ping in Docker](docker/README.md).
 
-For more information about dNation Ping Helm Chart, please read [dNation Ping Helm Chart](chart/README.md)
+For more information about dNation Ping Helm Chart, please read [dNation Ping Helm Chart](chart/README.md).
 
 # Contribution guidelines
 
@@ -21,4 +21,14 @@ If you want to contribute, please read following:
 1. [Code of Conduct](CODE_OF_CONDUCT.md)
 1. [How To](helpers/README.md) simplify your local development
 
-We use GitHub issues to manage requests and bugs, please visit our discussion forum if you have any questions.
+# Credits
+
+Following projects are used (alphabetical order):
+* [Blackbox Exporter](https://github.com/prometheus/blackbox_exporter/) - for ICMP (ping) probing
+* [Docker](https://www.docker.com/) - for building images
+* [Grafana](https://grafana.com/) - for metrics visualization
+* [Helm](https://helm.sh/) package manager - for easy installation into Kubernetes environment
+* [Prometheus](https://prometheus.io/) - for metrics collection
+
+# Contact
+See [dNation Contact Page](https://dnation.cloud/contact/).
