@@ -1,28 +1,23 @@
-![alt text](https://cdn.ifne.eu/public/icons/dnation_ping_long.png "dNation Ping logo")
--
-
-Helm chart for [dNation Ping](https://github.com/dNationCloud/kubernetes-monitoring) deployment is built with:
-
-* [grafana](https://github.com/grafana/helm-charts/tree/main/charts/grafana)
-* [prometheus](https://github.com/prometheus-community/helm-charts/tree/main/charts/prometheus)
-* [prometheus-blackbox-exporter](https://github.com/prometheus-community/helm-charts/tree/main/charts/prometheus-blackbox-exporter)
+# Prerequisites
+Following packages have to be installed into your Kubernetes environment:
+* [Helm](https://helm.sh/docs/intro/install/)
 
 # Installation
-
-Prerequisites
-* [Helm3](https://helm.sh/)
-
-dNation Ping Helm Chart is hosted in the [dNation helm repository](https://artifacthub.io/packages/search?repo=dnationcloud).
-
 ```bash
 # Add dNation helm repository
-helm repo add dnationcloud https://nexus.ifne.eu/repository/ifne-helm-public/
+helm repo add dnationcloud https://dnationcloud.github.io/helm-hub/
 helm repo update
 
 # Install dNation Ping
 helm install dnation-ping dnationcloud/dnation-ping
 ```
+* dNation Ping Helm Chart is hosted in the [dNation Helm Repository](https://artifacthub.io/packages/search?repo=dnationcloud).
 
 # Getting started
-
-Search for `Ping` dashboard. If you want to set the `Ping` dashboard as a home dashboard follow [here](https://grafana.com/docs/grafana/latest/administration/change-home-dashboard/#set-the-default-dashboard-through-preferences).
+* Expose Grafana (standalone instance installed via helm command above)
+```
+kubectl port-forward --address 0.0.0.0 svc/dnation-ping-grafana 3000:80
+```
+* Access Grafana: `http://<ClusterIP>:3000/`
+* Click `Ping` dashboard
+* If you want to set the `Ping` dashboard as a home dashboard, follow [instructions](https://grafana.com/docs/grafana/latest/administration/change-home-dashboard/#set-the-default-dashboard-through-preferences)

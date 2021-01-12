@@ -1,61 +1,53 @@
-![alt text](https://cdn.ifne.eu/public/icons/dnation_ping_long.png "dNation Ping logo")
--
-
-## Installation
-Prerequisites
-
+# Prerequisites
 * [Docker](https://www.docker.com/)
-* [Docker-compose](https://docs.docker.com/compose/) **>= *v3.0***
-
-Install dNation-Ping
-
+* [Docker-compose](https://docs.docker.com/compose/)
 ```bash
-umask 0022
-git clone https://github.com/dNationCloud/ping.git
+# Installs also Docker (as a dependency)
+sudo apt install docker-compose
 ```
 
-* Add user to group `docker`, logout/login if necessary
-
+* User is a member of `docker` group
 ```bash
-# Is used in docker group?
+# Is user already a member?
 groups | grep docker
 ... docker
 
-# Docker-Compose
-chmod a=rwx docker/prometheus/prometheus
-docker-compose up -d -f /docker
+# If not, add him
+sudo adduser $USER docker
+
+# Launch new shell, so group change above takes effect
+# Alternatively, logout and login 
+su - $USER
+```
+
+# Installation
+```bash
+git clone https://github.com/dNationCloud/ping.git
+chmod a=rwx ping/docker/prometheus/prometheus
+```
+# Changing defauls (optional)
+* [docker/.env](docker/.env) - website access information
+* [docker/prometheus/targets.json](docker/prometheus/targets.json) - ping targets
+  * For measuring a home connection, include also your router (usually 192.168.1.1) as a ping target, useful for detection of problems with router itself (should be always reachable)
+```bash
+# After editing
+docker-compose restart prometheus
+docker-compose logs prometheus
+ping-prometheus | level=info ts=2021-01-10T22:30:56.937Z caller=main.go:918 msg="Completed loading of configuration file" filename=/etc/prometheus.yaml
+```
 
 # Launch
+```bash
+# Launch
 cd ping/docker
-chmod a=rwx prometheus/prometheus
 docker-compose up -d
 
-# Debugging
+# Debug
 docker-compose logs | grep ERROR
 ```
 
-## Usage
+# Getting started
 After installation:
 * http://localhost:3001/
 * Username: `admin`
 * Password : `pass`
-
-## Modifications
-
-| env variable | what it represents |
-| :--- | :--- |
-| ADMIN_USER | grafana UI username |
-| ADMIN_PASSWORD | grafana UI password |
-| PING_PORT | default grafana UI port |
-
-* **Edit pinging targets**
-
-    - Edit targets in /docker/prometheus/targets.json file *(don't use vim file editor)*
-    - Save file
-    - Applied changes should appear in GUI within 5 minutes period
-    
-## Built With
-
-* [Prometheus](https://prometheus.io/)
-* [Blackbox-exporter](https://github.com/prometheus/blackbox_exporter/blob/master/README.md)
-* [Grafana](https://grafana.com/)
