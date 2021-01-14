@@ -1,15 +1,17 @@
 apiVersion: v2
 name: dnation-ping
-version: 0.1.4
-appVersion: 0.1.4
-description: dNation Ping is a transparent tool for pinging selected IP addresses or domain names in set intervals with results displayed on graph
+version: 0.1.5
+appVersion: 0.1.5
+description: dNation Ping detects network connection problems by measuring ping response times of selected servers every 15 seconds.
 keywords:
-  - kubernetes
-  - ping
-  - grafana
-  - prometheus
-  - blackbox-exporter
-home: https://git.ifne.eu/dnation/ping
+- kubernetes
+- ping
+- grafana
+- prometheus
+- blackbox-exporter
+home: https://www.dnation.cloud
+sources:
+- https://github.com/dNationCloud/ping
 dependencies:
 - name: prometheus
   version: "11.16.*"
@@ -24,6 +26,6 @@ dependencies:
   repository: https://prometheus-community.github.io/helm-charts
   condition: prometheus-blackbox-exporter.enabled
 maintainers:
-- name: dnation
+- name: dNation
   email: cloud@dnation.cloud
 icon: https://cdn.ifne.eu/public/icons/dnation_ping.png
