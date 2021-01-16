@@ -31,4 +31,4 @@ Following projects are used (alphabetical order):
 * [Prometheus](https://prometheus.io/) - for metrics collection
 
 # Contact
-See [dNation Contact Page](https://dnation.cloud/contact/).
+See <a href="https://dnation.cloud/contact/" target="_blank" rel="noopener">dNation Contact Page</a>.
