@@ -24,7 +24,7 @@ Before sending your pull requests, make sure you followed this list.
 ## Developer Certificate of Origin (DCO)
 
 The Developer Certificate of Origin (DCO) is a legally binding statement that asserts that you are the
-creator of your contribution, and that you wish to allow dNation Kubernetes Monitoring project to use your work.
+creator of your contribution, and that you wish to allow dNation Ping project to use your work.
 
 Acknowledgement of this permission is done using a sign-off process in Git.
 The sign-off is a simple line at the end of the explanation for the patch. The
@@ -40,7 +40,7 @@ configuration, you can sign your commit automatically with `git commit -s`.
 
 Unfortunately, you have to use your real name (i.e., pseudonyms or anonymous
 contributions cannot be made). This is because the DCO is a legally binding
-document, granting the dNation Kubernetes Monitoring project to use your work.
+document, granting the dNation Ping project to use your work.
 
 ## License on the top of file
 
