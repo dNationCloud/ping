@@ -23,18 +23,18 @@ data:
       "graphTooltip": 0,
       "id": 1,
       "links": [
-          {
-            "asDropdown": true,
-            "icon": "cloud",
-            "includeVars": false,
-            "keepTime": false,
-            "tags": [],
-            "targetBlank": true,
-            "title": "dNation - Making Cloud Easy",
-            "type": "link",
-            "url": "https://www.dNation.cloud/"
-          }
-        ],
+              {
+                "asDropdown": true,
+                "icon": "cloud",
+                "includeVars": false,
+                "keepTime": false,
+                "tags": [],
+                "targetBlank": true,
+                "title": "dNation - Making Cloud Easy",
+                "type": "link",
+                "url": "https://www.dNation.cloud/"
+              }
+            ],
       "panels": [
         {
           "aliasColors": {},
@@ -53,7 +53,7 @@ data:
           "fill": 1,
           "fillGradient": 0,
           "gridPos": {
-            "h": 9,
+            "h": 14,
             "w": 24,
             "x": 0,
             "y": 0
@@ -61,19 +61,24 @@ data:
           "hiddenSeries": false,
           "id": 2,
           "legend": {
-            "avg": false,
-            "current": false,
-            "max": false,
-            "min": false,
+            "alignAsTable": true,
+            "avg": true,
+            "current": true,
+            "max": true,
+            "min": true,
+            "rightSide": false,
             "show": true,
             "total": false,
-            "values": false
+            "values": true
           },
           "lines": true,
           "linewidth": 1,
           "nullPointMode": "null",
+          "options": {
+            "alertThreshold": true
+          },
           "percentage": false,
-          "pluginVersion": "7.1.3",
+          "pluginVersion": "7.3.5",
           "pointradius": 2,
           "points": false,
           "renderer": "flot",
@@ -145,5 +150,5 @@ data:
       "timezone": "",
       "title": "Ping",
       "uid": "eQzUn_fWz",
-      "version": 1
+      "version": 3
     }
