@@ -143,8 +143,8 @@ data:
         "list": []
       },
       "time": {
-        "from": "now-2h",
-        "to": "now+2h"
+        "from": "now-4h",
+        "to": "now"
       },
       "timepicker": {},
       "timezone": "",
