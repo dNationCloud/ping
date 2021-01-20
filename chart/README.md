@@ -19,5 +19,7 @@ helm install dnation-ping dnationcloud/dnation-ping
 kubectl port-forward --address 0.0.0.0 svc/dnation-ping-grafana 3000:80
 ```
 * Access Grafana: `http://<ClusterIP>:3000/`
+* Username: `admin`
+* Password : `pass`
 * Click `Ping` dashboard
 * If you want to set the `Ping` dashboard as a home dashboard, follow [instructions](https://grafana.com/docs/grafana/latest/administration/change-home-dashboard/#set-the-default-dashboard-through-preferences)
