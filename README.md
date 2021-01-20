@@ -6,7 +6,7 @@
 
 dNation Ping detects network connection problems by measuring ping response times of selected servers every 15 seconds. Runs inside Kubernetes cluster or on a single machine (within a docker container).
 
-![alt text](images/ping_grafana_screenshot.png "dNation Ping GUI")
+![alt text](https://cdn.ifne.eu/public/icons/dnation_ping_screenshot.png "dNation Ping GUI")
 
 # Installation
 

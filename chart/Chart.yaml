@@ -1,7 +1,7 @@
 apiVersion: v2
 name: dnation-ping
-version: 0.1.5
-appVersion: 0.1.5
+version: 0.1.6
+appVersion: 0.1.6
 description: dNation Ping detects network connection problems by measuring ping response times of selected servers every 15 seconds.
 keywords:
 - kubernetes
