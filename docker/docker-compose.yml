@@ -32,10 +32,12 @@ services:
     volumes:
       - ./grafana/provisioning:/etc/grafana/provisioning:ro
       - ./grafana/dashboards-json:/etc/grafana/dashboards-json:ro
-      - ./images/grafana_icon.svg:/usr/share/grafana/public/img/grafana_icon.svg:rw
+      - ./grafana/dnation/brand.sh:/etc/grafana/brand.sh:rw
+      - ./grafana/dnation/logo.svg:/usr/share/grafana/public/img/logo.svg:ro
     ports:
       - ${PING_PORT}:3000
-
+    user: "0"
+    entrypoint: ["/bin/sh", "-c", "chmod 755 /etc/grafana/brand.sh && /etc/grafana/brand.sh && /run.sh"]
 
   blackbox:
     container_name: ping-blackbox
