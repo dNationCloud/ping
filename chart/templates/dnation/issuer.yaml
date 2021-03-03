@@ -4,6 +4,7 @@ apiVersion: cert-manager.io/v1
 kind: Issuer
 metadata:
   name: {{ .Values.dNation.issuer.name }}
+  namespace: dnation-ping
 spec:
   acme:
     # The ACME server URL
